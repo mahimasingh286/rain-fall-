@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainfall Prediction</title>
+    <style>
+        
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #000; 
+            color: #eee; 
+        }
+
+        
+        header {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 2em;
+            font-weight: bold;
+            border-bottom: 3px solid #1a2a6c;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+       
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #121212; 
+            border: 2px solid #444;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .container h2 {
+            color: #4fa3d1;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+
+        .container p {
+            font-size: 1em;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        
+        form {
+            text-align: left;
+            margin: 20px 0;
+            border: 1px solid #555;
+            border-radius: 10px;
+            padding: 20px;
+            background: #1e1e1e;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #bbb;
+        }
+
+        form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #555;
+            border-radius: 8px;
+            font-size: 1em;
+            background: #252525;
+            color: #fff;
+        }
+
+        form input:focus {
+            border-color: #4fa3d1;
+            box-shadow: 0 0 8px rgba(79, 163, 209, 0.4);
+            outline: none;
+        }
+
+        form button {
+            background: linear-gradient(90deg, #4fa3d1, #1e3c72);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: transform 0.2s ease-in-out, background 0.3s;
+        }
+
+        form button:hover {
+            background: #1e3c72;
+            transform: scale(1.05);
+        }
+
+        
+        #prediction-results {
+            margin-top: 40px;
+            padding: 25px;
+            border-top: 2px solid #4fa3d1;
+            text-align: center;
+            background: #1e1e1e;
+            border-radius: 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        #prediction-results h2 {
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            color: #4fa3d1;
+        }
+
+        #prediction-results p {
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #ccc;
+        }
+
+       
+        #plot {
+            margin-top: 30px;
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #4fa3d1;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            display: none;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+       
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 15px 0;
+            background: #1e1e1e;
+            font-size: 0.9em;
+            color: #888;
+            border-top: 2px solid #4fa3d1;
+        }
+
+        footer a {
+            color: #4fa3d1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+       
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            header {
+                font-size: 1.5em;
+            }
+
+            form input {
+                font-size: 0.9em;
+            }
+
+            form button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        🌧 Rainfall Prediction 🌟
+    </header>
+
+    <div class="container">
+        <h2>Predict Rainfall for the Next Month</h2>
+        <p>Enter the number of months and rainfall data to predict rainfall for the upcoming month.</p>
+        
+        
+        <form id="rainfall-form">
+            <label for="months">Number of months:</label>
+            <input type="number" id="months" name="months" placeholder="Enter number of months" required>
+            
+            <label for="rainfall">Enter the rainfall data (comma separated):</label>
+            <input type="text" id="rainfall" name="rainfall" placeholder="e.g., 10.5, 12.3, 15.7" required>
+            
+            <button type="submit">🌟 Predict Rainfall</button>
+        </form>
+
+       
+        <div id="prediction-results">
+            <h2>Prediction Results:</h2>
+            <p><strong>Predicted Rainfall for the next month:</strong> <span id="predicted-rainfall"></span> mm</p>
+            <img id="plot" src="" alt="Rainfall Analysis Plot"/>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Rainfall Prediction App | Designed with ❤ by 
+        <a href="#">group 3</a>          for any querry contact us:<a href="#">9455372811</a>
+    </footer>
+
+    <!-- JavaScript for form handling -->
+    <script>
+        document.getElementById('rainfall-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var months = document.getElementById('months').value;
+            var rainfall = document.getElementById('rainfall').value.split(',').map(function(item) {
+                return parseFloat(item.trim());
+            });
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ months: months, rainfall: rainfall })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('predicted-rainfall').innerText = data.predictedRainfall.toFixed(2);
+                document.getElementById('plot').src = data.imageUrl;
+                document.getElementById('plot').style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
